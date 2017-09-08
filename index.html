@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="/node_modules/systemjs/dist/system.js"></script>
+    <script src="/app.js"></script>
+
+
+    <script>
+        //SystemJS.defaultJSExtensions = true;
+        SystemJS.config(
+            {
+                map: {
+                    'angular': '/node_modules/angular/angular.min.js',
+                    'jquery':'node_modules/jquery/dist/jquery.min.js'
+                },
+                meta: {
+                    '/node_modules/jquery/dist/jquery.min.js': {
+                        format: 'global',
+                        exports: 'jquery'
+                    }
+                    
+                }
+            });
+
+            SystemJS.import('test.module');
+        SystemJS.import('test.controller');
+        SystemJS.import('test.directive');
+
+        SystemJS.import('bootstrap').then(function () {
+            console.log('all fine...');
+        })
+    </script>
+
+</head>
+
+<body>
+    <foo-bar></foo-bar>
+
+
+
+</body>
+
+</html>

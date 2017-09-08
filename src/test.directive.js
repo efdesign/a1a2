@@ -1,4 +1,7 @@
-angular.module('test').directive('fooBar', function () {
+import module from './test.module'
+import 'jquery'
+
+module.directive('fooBar', function () {
     return {
         template:'<span>{{$ctrl.foo}}</span>',
                 scope: {},
