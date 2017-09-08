@@ -66,18 +66,16 @@ System.register("test.directive", ["test.module", "jquery"], function (exports_4
             }
         ],
         execute: function () {
-            test_module_3.default.directive('fooBar', function () {
-                return {
-                    template: '<span>{{$ctrl.foo}}</span>',
-                    scope: {},
-                    restrict: 'E',
-                    controller: 'test.controller',
-                    controllerAs: '$ctrl',
-                    link: function (elm, attr) {
-                        // fake some global dependency here...for later
-                        console.log(jQuery.fn.jquery);
-                    }
-                };
+            test_module_3.default.component('fooBar', {
+                template: '<span>{{$ctrl.foo}}</span>',
+                // scope: {},
+                // restrict: 'E',
+                controller: 'test.controller',
+                // controllerAs: '$ctrl',
+                link: function (elm, attr) {
+                    // fake some global dependency here...for later
+                    console.log(jQuery.fn.jquery);
+                }
             });
         }
     };

@@ -1,17 +1,17 @@
 import module from './test.module'
 import 'jquery'
 
-module.directive('fooBar', function () {
-    return {
+module.component('fooBar',  {
+    
         template:'<span>{{$ctrl.foo}}</span>',
-                scope: {},
-        restrict: 'E',
+        // scope: {},
+        // restrict: 'E',
         controller: 'test.controller',
-        controllerAs: '$ctrl',
+        // controllerAs: '$ctrl',
         link:function(elm,attr){
             // fake some global dependency here...for later
             console.log(jQuery.fn.jquery);
         }
         
-    }
+    
 });
