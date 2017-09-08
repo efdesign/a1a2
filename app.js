@@ -32,45 +32,50 @@ System.register("bootstrap", ["angular", "test.module"], function (exports_2, co
         }
     };
 });
-System.register("test.controller", ["test.module"], function (exports_3, context_3) {
+//import module from './test.module'
+// conversion to component
+System.register("test.controller", [], function (exports_3, context_3) {
     "use strict";
     var __moduleName = context_3 && context_3.id;
-    var test_module_2;
+    var TestController;
+    return {
+        setters: [],
+        execute: function () {
+            TestController = /** @class */ (function () {
+                function TestController() {
+                    console.log('controller instantiated ');
+                    this.foo = 'foo';
+                    this.getFoo = function () {
+                        return this.foo;
+                    };
+                }
+                return TestController;
+            }());
+            exports_3("TestController", TestController);
+        }
+    };
+});
+System.register("test.directive", ["test.module", "jquery", "test.controller"], function (exports_4, context_4) {
+    "use strict";
+    var __moduleName = context_4 && context_4.id;
+    var test_module_2, my;
     return {
         setters: [
             function (test_module_2_1) {
                 test_module_2 = test_module_2_1;
-            }
-        ],
-        execute: function () {
-            test_module_2.default.controller('test.controller', function () {
-                console.log('controller instantiated ');
-                this.foo = 'foo';
-                this.getFoo = function () {
-                    return this.foo;
-                };
-            });
-        }
-    };
-});
-System.register("test.directive", ["test.module", "jquery"], function (exports_4, context_4) {
-    "use strict";
-    var __moduleName = context_4 && context_4.id;
-    var test_module_3;
-    return {
-        setters: [
-            function (test_module_3_1) {
-                test_module_3 = test_module_3_1;
             },
             function (_3) {
+            },
+            function (my_1) {
+                my = my_1;
             }
         ],
         execute: function () {
-            test_module_3.default.component('fooBar', {
+            test_module_2.default.component('fooBar', {
                 template: '<span>{{$ctrl.foo}}</span>',
-                // scope: {},
+                bindings: {},
                 // restrict: 'E',
-                controller: 'test.controller',
+                controller: my.TestController,
                 // controllerAs: '$ctrl',
                 link: function (elm, attr) {
                     // fake some global dependency here...for later
