@@ -4,6 +4,10 @@
 
 
 export class TestController{
+
+    foo:string;
+    getFoo:Function;
+
     constructor () {
         console.log('controller instantiated ');
         this.foo = 'foo';

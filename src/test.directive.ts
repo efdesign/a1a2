@@ -9,7 +9,7 @@ module.component('fooBar',  {
         // restrict: 'E',
         controller: my.TestController,
         // controllerAs: '$ctrl',
-        link:function(elm,attr){
+        link:function(elm:any,attr:any){
             // fake some global dependency here...for later
             console.log(jQuery.fn.jquery);
         }
