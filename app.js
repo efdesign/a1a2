@@ -75,9 +75,9 @@ System.register("test.directive", ["test.module", "jquery", "test.controller"], 
                 return {
                     template: '<span>{{$ctrl.foo}}</span>',
                     scope: {},
-                    // restrict: 'E',
+                    restrict: 'E',
                     controller: my.TestController,
-                    // controllerAs: '$ctrl',
+                    controllerAs: '$ctrl',
                     link: function (elm, attr) {
                         // fake some global dependency here...for later
                         console.log(jQuery.fn.jquery);
