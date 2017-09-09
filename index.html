@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>UsingAngularInAngularjs</title>
     <script src="/node_modules/systemjs/dist/system.js"></script>
     <script src="/app.js"></script>
 
@@ -17,30 +17,38 @@
 
 
 
+                paths:{
+                    'rxjs':'node_modules/rxjs'
+                },
+
 
                 map: {
-                    'angular': '/node_modules/angular/angular.min.js',
+
+                    'angular': 'node_modules/angular/angular.min.js',
                     'jquery': 'node_modules/jquery/dist/jquery.min.js',
+                    'reflect-metadata': 'node_modules/reflect-metadata/reflect.js',
+                    'zonejs': 'node_modules/zone.js/dist/zone.min.js',
+
 
 
                     //app: 'app', // location of transpiled app files
 
                     // angular minimized umd bundles
-                    '@angular/core': 'npm:@angular/core/bundles/core.umd.min.js',
-                    '@angular/common': 'npm:@angular/common/bundles/common.umd.min.js',
-                    '@angular/compiler': 'npm:@angular/compiler/bundles/compiler.umd.min.js',
-                    '@angular/platform-browser': 'npm:@angular/platform-browser/bundles/platform-browser.umd.min.js',
-                    '@angular/platform-browser-dynamic': 'npm:@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.min.js',
-                    '@angular/http': 'npm:@angular/http/bundles/http.umd.min.js',
-                    '@angular/router': 'npm:@angular/router/bundles/router.umd.min.js',
-                    '@angular/router/upgrade': 'npm:@angular/router/bundles/router-upgrade.umd.min.js',
-                    '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.min.js',
-                    '@angular/upgrade': 'npm:@angular/upgrade/bundles/upgrade.umd.min.js',
-                    '@angular/upgrade/static': 'npm:@angular/upgrade/bundles/upgrade-static.umd.min.js',
+                    '@angular/core': 'node_modules/@angular/core/bundles/core.umd.min.js',
+                    '@angular/common': 'node_modules/@angular/common/bundles/common.umd.min.js',
+                    '@angular/compiler': 'node_modules/@angular/compiler/bundles/compiler.umd.min.js',
+                    '@angular/platform-browser': 'node_modules/@angular/platform-browser/bundles/platform-browser.umd.min.js',
+                    '@angular/platform-browser-dynamic': 'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.min.js',
+                    '@angular/http': 'node_modules/@angular/http/bundles/http.umd.min.js',
+                    '@angular/router': 'node_modules/@angular/router/bundles/router.umd.min.js',
+                    '@angular/router/upgrade': 'node_modules/@angular/router/bundles/router-upgrade.umd.min.js',
+                    '@angular/forms': 'node_modules/@angular/forms/bundles/forms.umd.min.js',
+                    '@angular/upgrade': 'node_modules/@angular/upgrade/bundles/upgrade.umd.min.js',
+                    '@angular/upgrade/static': 'node_modules/@angular/upgrade/bundles/upgrade-static.umd.min.js',
 
                     // other libraries
-                    'rxjs': 'npm:rxjs@5.0.1',
-                    'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js'
+                    //'rxjs': 'node_modules/rxjs'
+                    //'angular-in-memory-web-api': 'node_modules/angular-in-memory-web-api/bundles/in-memory-web-api.umd.js'
 
 
                 },
@@ -50,6 +58,12 @@
                         exports: 'jquery'
                     }
 
+                },
+                packages: {
+                    
+                    rxjs: {
+                        defaultExtension: 'js'
+                    }
                 }
             });
 
@@ -57,7 +71,7 @@
         SystemJS.import('test.controller');
         SystemJS.import('test.directive');
 
-        SystemJS.import('bootstrap').then(function () {
+        SystemJS.import('a2.app').then(function () {
             console.log('all fine...');
         })
     </script>
@@ -65,10 +79,11 @@
 </head>
 
 <body>
+    <!-- app root is an A2 downgraded component, that's registered in a1 as directive -->
+    <app-root>Loading...</app-root>
+    <ng1-component></ng1-component>
+    <ng2-component></ng2-component> <!-- not working -->
     <foo-bar></foo-bar>
-
-
-
 </body>
 
 </html>
