@@ -81,6 +81,8 @@ module.component('ng1Component', {
     `
 }) export class Ng2Component { }
 
+module.directive('angularComponent', downgradeComponent({component: Ng2Component}));
+
 // The root Angular module
 @NgModule({
   imports: [

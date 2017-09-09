@@ -24,11 +24,12 @@ System.register("test.module", ["angular"], function (exports_1, context_1) {
 System.register("a2.app", ["@angular/upgrade/static", "@angular/core", "@angular/platform-browser", "@angular/platform-browser-dynamic", "test.module", "reflect-metadata", "zonejs"], function (exports_2, context_2) {
     "use strict";
     var __moduleName = context_2 && context_2.id;
-    var static_1, core_1, platform_browser_1, platform_browser_dynamic_1, core_2, test_module_1, Ng2Component, RootModule;
+    var static_1, core_1, platform_browser_1, platform_browser_dynamic_1, core_2, static_2, test_module_1, Ng2Component, RootModule;
     return {
         setters: [
             function (static_1_1) {
                 static_1 = static_1_1;
+                static_2 = static_1_1;
             },
             function (core_1_1) {
                 core_1 = core_1_1;
@@ -109,6 +110,7 @@ System.register("a2.app", ["@angular/upgrade/static", "@angular/core", "@angular
                 return Ng2Component;
             }());
             exports_2("Ng2Component", Ng2Component);
+            test_module_1.default.directive('angularComponent', static_2.downgradeComponent({ component: Ng2Component }));
             RootModule = /** @class */ (function () {
                 function RootModule() {
                 }

@@ -29,4 +29,14 @@ Upgrade guides
 https://hackernoon.com/angular-v4-hybrid-upgrade-application-73d5afba1e01
 https://medium.com/@SevenLee/configuration-tips-to-build-hybrid-angular-1-and-angular-2-project-in-real-world-230b715629dc
 https://hotell.gitbooks.io/ng-metadata/content/docs/recipes/ng-upgrade.html
+
 https://vsavkin.com/migrating-angular-1-applications-to-angular-2-in-5-simple-steps-40621800a25b
+
+
+https://github.com/ui-router/angular-hybrid/tree/master/example KEY CODE FOR UPGRADE BOOT
+https://github.com/ui-router/sample-app-angular-hybrid
+
+
+https://hackernoon.com/angular-v4-hybrid-upgrade-application-73d5afba1e01
+
+
