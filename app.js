@@ -110,7 +110,7 @@ System.register("a2.app", ["@angular/upgrade/static", "@angular/core", "@angular
                 return Ng2Component;
             }());
             exports_2("Ng2Component", Ng2Component);
-            test_module_1.default.directive('angularComponent', static_2.downgradeComponent({ component: Ng2Component }));
+            test_module_1.default.directive('ng2Component', static_2.downgradeComponent({ component: Ng2Component }));
             RootModule = /** @class */ (function () {
                 function RootModule() {
                 }
@@ -215,6 +215,18 @@ System.register("test.directive", ["test.module", "jquery", "test.controller"], 
                         console.log(jQuery.fn.jquery);
                     }
                 };
+            });
+            test_module_2.default.component('wow', {
+                template: "<span>wow: {{  $ctrl.foo }}</span>",
+                bindings: {
+                    foo: "="
+                },
+                // bindToController:true, -> use bindings
+                // link-> can't use
+                //controllerAs:"$ctrl",
+                controller: function () {
+                    this.foo = 'wow';
+                }
             });
         }
     };
