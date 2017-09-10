@@ -66,9 +66,9 @@ System.register("a1.fooBar.directive", ["a1.module", "jquery", "a1.controller"],
             //import 'reflect-metadata' // for decorators
             //import 'zonejs' // whatever 
             /* a directive in A1, this will need to be migrated, for test purposes in A2 component or directive then downgraded for usage in a1 */
-            a1_module_1.default.directive('fooBar', function () {
+            a1_module_1.default.directive('fooBar', function (testService) {
                 return {
-                    template: '<span>A1 directive fooBar says "{{$ctrl.foo}}", jquery version {{$ctrl.jqueryVersion}}</span>',
+                    template: '<span>A1 directive fooBar says "{{$ctrl.foo}}", jquery version {{$ctrl.jqueryVersion}} testSevice.foo: {{$ctrl.testServiceFoo}} through link fn</span>',
                     scope: {},
                     restrict: 'E',
                     controller: my.TestController,
@@ -77,6 +77,7 @@ System.register("a1.fooBar.directive", ["a1.module", "jquery", "a1.controller"],
                         // fake some global dependency here...for later
                         // console.log(jQuery.fn.jquery);
                         controller.jqueryVersion = jQuery.fn.jquery;
+                        controller.testServiceFoo = testService.foo();
                         //testService.foo();
                     }
                 };
@@ -142,18 +143,49 @@ System.register("a1.testService.service", ["a1.module"], function (exports_4, co
             exports_4("testService", testService = function () {
                 return {
                     foo: function () {
-                        console.log('foo from test service foo()');
+                        var msg = 'foo from test service foo()';
+                        console.log(msg);
+                        return msg;
                     }
                 };
             });
+            // this will need a system import otherwise it's not getting recognized
+            // maybe there is a way with an ES6 import to just to just load it internally ? so that system js does not have to load it on it's own ?
             a1_module_2.default.service('testService', testService);
         }
     };
 });
-System.register("a2.wow.component", ["a1.module", "jquery", "@angular/core", "@angular/upgrade/static"], function (exports_5, context_5) {
+System.register("a2.component2", ["@angular/core"], function (exports_5, context_5) {
     "use strict";
     var __moduleName = context_5 && context_5.id;
-    var a1_module_3, core_1, static_1, A2WowComponent;
+    var core_1, A2Component2;
+    return {
+        setters: [
+            function (core_1_1) {
+                core_1 = core_1_1;
+            }
+        ],
+        execute: function () {
+            A2Component2 = /** @class */ (function () {
+                function A2Component2() {
+                    this.bar = 'bar';
+                }
+                A2Component2 = __decorate([
+                    core_1.Component({
+                        selector: 'ng2-component2',
+                        template: "\n      <div>ng2 component, this component is defined as a2 component but not downgraded, as such it's handled by Angualar. {{bar}}</div>\n      <!--<a uiSref=\"app\">Back to app</a>\n      <ui-view></ui-view>-->\n    "
+                    })
+                ], A2Component2);
+                return A2Component2;
+            }());
+            exports_5("A2Component2", A2Component2);
+        }
+    };
+});
+System.register("a2.wow.component", ["a1.module", "jquery", "@angular/core", "@angular/upgrade/static"], function (exports_6, context_6) {
+    "use strict";
+    var __moduleName = context_6 && context_6.id;
+    var a1_module_3, core_2, core_3, static_1, A2WowComponent;
     return {
         setters: [
             function (a1_module_3_1) {
@@ -161,8 +193,9 @@ System.register("a2.wow.component", ["a1.module", "jquery", "@angular/core", "@a
             },
             function (_3) {
             },
-            function (core_1_1) {
-                core_1 = core_1_1;
+            function (core_2_1) {
+                core_2 = core_2_1;
+                core_3 = core_2_1;
             },
             function (static_1_1) {
                 static_1 = static_1_1;
@@ -173,33 +206,36 @@ System.register("a2.wow.component", ["a1.module", "jquery", "@angular/core", "@a
                 function A2WowComponent() {
                     this.foo = 'wow';
                 }
+                __decorate([
+                    core_3.Input()
+                ], A2WowComponent.prototype, "bar", void 0);
                 A2WowComponent = __decorate([
-                    core_1.Component({
+                    core_2.Component({
                         selector: 'wow',
-                        template: "<span>A2 wow component says: {{foo}}</span>"
+                        template: "<div>A2 wow(selector) component (downgraded)  says: <strong>{{foo}}</strong> bar is an input with value <strong>{{bar}}</strong> from the template</div>"
                     })
                 ], A2WowComponent);
                 return A2WowComponent;
             }());
-            exports_5("A2WowComponent", A2WowComponent);
+            exports_6("A2WowComponent", A2WowComponent);
             a1_module_3.default.directive('a2WowComponent', static_1.downgradeComponent({ component: A2WowComponent }));
         }
     };
 });
 // https://github.com/ui-router/angular-hybrid/tree/master/example
-System.register("a2.module", ["@angular/upgrade/static", "@angular/core", "@angular/platform-browser", "@angular/platform-browser-dynamic", "a2.component", "a1.module", "a2.wow.component"], function (exports_6, context_6) {
+System.register("a2.module", ["@angular/upgrade/static", "@angular/core", "@angular/platform-browser", "@angular/platform-browser-dynamic", "a2.component", "a2.component2", "a1.module", "a2.wow.component"], function (exports_7, context_7) {
     "use strict";
-    var __moduleName = context_6 && context_6.id;
-    var static_2, static_3, core_2, platform_browser_1, platform_browser_dynamic_1, core_3, a2_component_1, a1_module_4, a2_wow_component_1, Ng2Component, A2Module;
+    var __moduleName = context_7 && context_7.id;
+    var static_2, static_3, core_4, platform_browser_1, platform_browser_dynamic_1, core_5, a2_component_1, a2_component2_1, a1_module_4, a2_wow_component_1, Ng2Component, A2Module;
     return {
         setters: [
             function (static_2_1) {
                 static_2 = static_2_1;
                 static_3 = static_2_1;
             },
-            function (core_2_1) {
-                core_2 = core_2_1;
-                core_3 = core_2_1;
+            function (core_4_1) {
+                core_4 = core_4_1;
+                core_5 = core_4_1;
             },
             function (platform_browser_1_1) {
                 platform_browser_1 = platform_browser_1_1;
@@ -209,6 +245,9 @@ System.register("a2.module", ["@angular/upgrade/static", "@angular/core", "@angu
             },
             function (a2_component_1_1) {
                 a2_component_1 = a2_component_1_1;
+            },
+            function (a2_component2_1_1) {
+                a2_component2_1 = a2_component2_1_1;
             },
             function (a1_module_4_1) {
                 a1_module_4 = a1_module_4_1;
@@ -228,14 +267,14 @@ System.register("a2.module", ["@angular/upgrade/static", "@angular/core", "@angu
                 function Ng2Component() {
                 }
                 Ng2Component = __decorate([
-                    core_3.Component({
+                    core_5.Component({
                         selector: 'ng2-component',
                         template: "\n      <div>ng2 component, this component is defined as a2 component in a2 module and downgraded throught downGrade component and registered in a1 module as component</div>\n      <!--<a uiSref=\"app\">Back to app</a>\n      <ui-view></ui-view>-->\n    "
                     })
                 ], Ng2Component);
                 return Ng2Component;
             }());
-            exports_6("Ng2Component", Ng2Component);
+            exports_7("Ng2Component", Ng2Component);
             a1_module_4.default.directive('ng2Component', static_3.downgradeComponent({ component: Ng2Component }));
             A2Module = /** @class */ (function () {
                 function A2Module() {
@@ -244,7 +283,7 @@ System.register("a2.module", ["@angular/upgrade/static", "@angular/core", "@angu
                     /* no body: this disables normal (non-hybrid) Angular bootstrapping */
                 };
                 A2Module = __decorate([
-                    core_2.NgModule({
+                    core_4.NgModule({
                         imports: [
                             platform_browser_1.BrowserModule,
                             // Provide Angular upgrade capabilities
@@ -255,13 +294,13 @@ System.register("a2.module", ["@angular/upgrade/static", "@angular/core", "@angu
                             // Provides the @uirouter/angular directives
                             //UIRouterModule,
                         ],
-                        declarations: [Ng2Component, a2_component_1.A2Component, a2_wow_component_1.A2WowComponent],
-                        entryComponents: [Ng2Component, a2_wow_component_1.A2WowComponent],
+                        declarations: [Ng2Component, a2_component_1.A2Component, a2_wow_component_1.A2WowComponent, a2_component2_1.A2Component2],
+                        entryComponents: [Ng2Component, a2_wow_component_1.A2WowComponent, a2_component2_1.A2Component2],
                     })
                 ], A2Module);
                 return A2Module;
             }());
-            exports_6("A2Module", A2Module);
+            exports_7("A2Module", A2Module);
             // Using AngularJS config block, call `deferIntercept()`.
             // This tells UI-Router to delay the initial URL sync (until all bootstrapping is complete)
             // app.config([ '$urlServiceProvider', $urlService => $urlService.deferIntercept() ]);
@@ -281,14 +320,14 @@ System.register("a2.module", ["@angular/upgrade/static", "@angular/core", "@angu
         }
     };
 });
-System.register("a2.component", ["@angular/core", "@angular/upgrade/static", "a1.module"], function (exports_7, context_7) {
+System.register("a2.component", ["@angular/core", "@angular/upgrade/static", "a1.module"], function (exports_8, context_8) {
     "use strict";
-    var __moduleName = context_7 && context_7.id;
-    var core_4, static_4, a1_module_5, A2Component;
+    var __moduleName = context_8 && context_8.id;
+    var core_6, static_4, a1_module_5, A2Component;
     return {
         setters: [
-            function (core_4_1) {
-                core_4 = core_4_1;
+            function (core_6_1) {
+                core_6 = core_6_1;
             },
             function (static_4_1) {
                 static_4 = static_4_1;
@@ -305,7 +344,7 @@ System.register("a2.component", ["@angular/core", "@angular/upgrade/static", "a1
                     return this.a2member;
                 };
                 A2Component = __decorate([
-                    core_4.Component({
+                    core_6.Component({
                         //moduleId: A2Module.id, /* fixes error on declarations, but still does not render */
                         selector: "a2-component",
                         template: "<div> hello i am an angular 2 downgraded component</div>"
@@ -313,7 +352,7 @@ System.register("a2.component", ["@angular/core", "@angular/upgrade/static", "a1
                 ], A2Component);
                 return A2Component;
             }());
-            exports_7("A2Component", A2Component);
+            exports_8("A2Component", A2Component);
             // downgrade and register in A1
             // TO BE ABLE TO USE the downgraded component add it to
             //declarations: [Ng2Component,A2Component,A2WowComponent],

@@ -14,6 +14,7 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { Component } from '@angular/core';
 
 import {A2Component} from './a2.component';
+import {A2Component2} from './a2.component2';
 
 
 import module from './a1.module';
@@ -59,8 +60,8 @@ module.directive('ng2Component', downgradeComponent({component: Ng2Component}));
     // Provides the @uirouter/angular directives
     //UIRouterModule,
   ],
-  declarations: [Ng2Component,A2Component,A2WowComponent],
-  entryComponents: [Ng2Component,A2WowComponent],
+  declarations: [Ng2Component,A2Component,A2WowComponent,A2Component2],
+  entryComponents: [Ng2Component,A2WowComponent,A2Component2],
 }) export class A2Module {
   ngDoBootstrap() {
     /* no body: this disables normal (non-hybrid) Angular bootstrapping */

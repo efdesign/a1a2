@@ -106,3 +106,14 @@ https://github.com/ui-router/sample-app-angular-hybrid
 
 RISK ********
 debugging a compiled app, with no sourcemap is basically impossible...
+
+
+//----------------------/----------------------/----------------------/----------------------/----------------------/
+declarations and entry components note
+
+Because HeroDetailComponent is an Angular component, you must also add it to the declarations in the AppModule.
+
+And because this component is being used from the AngularJS module, and is an entry point into the Angular application, you must add it to the entryComponents for the NgModule.
+
+
+Note that this AngularJS is an element directive (restrict: 'E') called heroDetail. An AngularJS element directive is matched based on its name. The selector metadata of the downgraded Angular component is ignored.

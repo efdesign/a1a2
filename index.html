@@ -73,6 +73,7 @@
         SystemJS.import('a1.module');
         SystemJS.import('a1.controller');
         SystemJS.import('a1.fooBar.directive'); /* case sensitive */
+        SystemJS.import('a1.testService.service'); /* case sensitive */
         SystemJS.import('a2.component'); /* case sensitive */
         SystemJS.import('a2.module').then(function () {
             console.log('all fine...');
@@ -82,16 +83,24 @@
 </head>
 
 <body>
-    
+    This application has more or less the structure and dependencies of the real app we are porting.
+    ui router is not yet in the picture but see readme for article pointing on how to upgrade the router
+    many components are simple and undrealistic but we show di in angular
     <ng1-component></ng1-component>
     <foo-bar></foo-bar>
-    <ng2-component></ng2-component>
-    <wow foo="21"></wow>
+    <ng2-component>
+        <a2-component2></a2-component2>
+    </ng2-component>
+
+    <!-- this component is declared and used in A2, but does not render -->
+    <wow foo="21" ></wow>
 
     <!-- does not render... -->
     <a2-component></a2-component>
-    <a2-wow-component></a2-wow-component>
 
+    <!-- this is wow, dowgraded but the template has A2 syntax-->
+    <a2-wow-component [bar]="'I am bar'"></a2-wow-component>
+    
     
 </body>
 

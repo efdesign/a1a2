@@ -11,9 +11,9 @@ import { downgradeComponent} from '@angular/upgrade/static';
 //import 'zonejs' // whatever 
 
 /* a directive in A1, this will need to be migrated, for test purposes in A2 component or directive then downgraded for usage in a1 */
-module.directive('fooBar', function () {
+module.directive('fooBar', function (testService) {
     return {
-        template: '<span>A1 directive fooBar says "{{$ctrl.foo}}", jquery version {{$ctrl.jqueryVersion}}</span>',
+        template: '<span>A1 directive fooBar says "{{$ctrl.foo}}", jquery version {{$ctrl.jqueryVersion}} testSevice.foo: {{$ctrl.testServiceFoo}} through link fn</span>',
         scope: {},
         restrict: 'E',
         controller: my.TestController,
@@ -22,6 +22,8 @@ module.directive('fooBar', function () {
             // fake some global dependency here...for later
             // console.log(jQuery.fn.jquery);
             controller.jqueryVersion = jQuery.fn.jquery;
+            controller.testServiceFoo = testService.foo(); 
+           
             //testService.foo();
         }
     }

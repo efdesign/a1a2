@@ -11,11 +11,13 @@ import testService from './a1.testService.service';
 //import 'zonejs' // whatever
 
 @Component({
-    selector:'wow',
-    template:`<span>A2 wow component says: {{foo}}</span>`
+    selector:'wow', // used in angular 2 ignored by angular 1
+    template:`<div>A2 wow(selector) component (downgraded)  says: <strong>{{foo}}</strong> bar is an input with value <strong>{{bar}}</strong> from the template</div>`
 })
+
 export class A2WowComponent{
-    foo:string;
+    foo:string; // hardcoded in constructor
+    @Input() bar:string; // this allows for [] input binding in the template
 
     constructor(){
         this.foo = 'wow';
