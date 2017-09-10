@@ -120,3 +120,30 @@ And because this component is being used from the AngularJS module, and is an en
 
 
 Note that this AngularJS is an element directive (restrict: 'E') called heroDetail. An AngularJS element directive is matched based on its name. The selector metadata of the downgraded Angular component is ignored.
+
+
+
+
+//----------------------/----------------------/----------------------/----------------------/----------------------/
+import * as angular from...UMD and IAngularStatic... 
+
+Why declare angular as angular.IAngularStatic?
+@types/angular is declared as a UMD module, and due to the way UMD typings work, once you have an ES6 import statement in a file all UMD typed modules must also be imported via import statements instead of being globally available.
+
+AngularJS is currently loaded by a script tag in index.html, which means that the whole app has access to it as a global and uses the same instance of the angular variable. If you used import * as angular from 'angular' instead, you'd also have to load every file in the AngularJS app to use ES2015 modules in order to ensure AngularJS was being loaded correctly.
+
+This is a considerable effort and it often isn't worth it, especially since you are in the process of moving your code to Angular. Instead, declare angular as angular.IAngularStatic to indicate it is a global variable and still have full typing support.
+
+
+//----------------------/----------------------/----------------------/----------------------/----------------------/
+DI , INJECTABLES , SERVICES
+Registering at a component level means you get a new instance of the service with each new instance of that component.
+
+Points to remember about dependency injection:
+https://angular.io/guide/architecture#dependency-injection
+Dependency injection is wired into the Angular framework and used everywhere.
+The injector is the main mechanism.
+An injector maintains a container of service instances that it created.
+An injector can create a new service instance from a provider.
+A provider is a recipe for creating a service.
+Register providers with injectors.

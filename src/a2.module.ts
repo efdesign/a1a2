@@ -9,7 +9,7 @@ import { downgradeComponent} from '@angular/upgrade/static';
 
 
 import { NgModule }      from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule , platformBrowser} from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { Component } from '@angular/core';
 
@@ -73,7 +73,8 @@ module.directive('ng2Component', downgradeComponent({component: Ng2Component}));
 // app.config([ '$urlServiceProvider', $urlService => $urlService.deferIntercept() ]);
 
 // Manually bootstrap the Angular app
-platformBrowserDynamic().bootstrapModule(A2Module).then(platformRef => {
+/*AOT broken* ///platformBrowser().bootstrapModuleFactory(A2Module).then(platformRef => {
+/*JIT */platformBrowserDynamic().bootstrapModule(A2Module).then(platformRef => {
   const injector = platformRef.injector;
   const upgrade = injector.get(UpgradeModule) as UpgradeModule;
 

@@ -321,7 +321,8 @@ System.register("a2.module", ["@angular/upgrade/static", "@angular/core", "@angu
             // This tells UI-Router to delay the initial URL sync (until all bootstrapping is complete)
             // app.config([ '$urlServiceProvider', $urlService => $urlService.deferIntercept() ]);
             // Manually bootstrap the Angular app
-            platform_browser_dynamic_1.platformBrowserDynamic().bootstrapModule(A2Module).then(function (platformRef) {
+            /*AOT broken* ///platformBrowser().bootstrapModuleFactory(A2Module).then(platformRef => {
+            /*JIT */ platform_browser_dynamic_1.platformBrowserDynamic().bootstrapModule(A2Module).then(function (platformRef) {
                 var injector = platformRef.injector;
                 var upgrade = injector.get(static_2.UpgradeModule);
                 // The DOM must be already be available
