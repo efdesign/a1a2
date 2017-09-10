@@ -90,9 +90,19 @@ In a hybrid application you run both versions of Angular at the same time. That 
 
 You must bootstrap the Angular bits first and then ask the UpgradeModule to bootstrap the AngularJS bits next.
 
-
+****************
 quickstart (repo layout)
 git clone https://github.com/angular/quickstart.git quickstart  
 
 
 systemjs angular loader ??? WHAT IS THIS ? cusom js found in the quickstart folder
+
+
+****************
+UI ROUTER HYBRID APP (non trivial, with webpack pipeline ad ui-router-upgrade/hybrid)
+https://github.com/ui-router/sample-app-angular-hybrid
+
+
+
+RISK ********
+debugging a compiled app, with no sourcemap is basically impossible...

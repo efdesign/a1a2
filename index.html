@@ -70,11 +70,11 @@
                 }
             });
 
-        SystemJS.import('test.module');
-        SystemJS.import('test.controller');
-        SystemJS.import('test.directive');
-
-        SystemJS.import('a2.app').then(function () {
+        SystemJS.import('a1.module');
+        SystemJS.import('a1.controller');
+        SystemJS.import('a1.fooBar.directive'); /* case sensitive */
+        SystemJS.import('a2.component'); /* case sensitive */
+        SystemJS.import('a2.module').then(function () {
             console.log('all fine...');
         })
     </script>
@@ -87,7 +87,12 @@
     <foo-bar></foo-bar>
     <ng2-component></ng2-component>
     <wow foo="21"></wow>
-    <wowng2></wowng2>
+
+    <!-- does not render... -->
+    <a2-component></a2-component>
+    <a2-wow-component></a2-wow-component>
+
+    
 </body>
 
 </html>

@@ -1,20 +1,20 @@
-import module from './test.module'
+import module from './a1.module'
 import 'jquery'
-import * as my from './test.controller'
+import * as my from './a1.controller'
 import { Component } from '@angular/core';
 import {Input, Output, EventEmitter } from '@angular/core';
 import { downgradeComponent} from '@angular/upgrade/static';
 
-import testService from './test.service';
+import testService from './a1.testService.service';
 
 //import 'reflect-metadata' // for decorators
 //import 'zonejs' // whatever
 
 @Component({
-    selector:'wowng2',
-    template:`<span>wow: {{  $ctrl.foo }}</span>`
+    selector:'wow',
+    template:`<span>A2 wow component says: {{foo}}</span>`
 })
-export class Wowng2{
+export class A2WowComponent{
     foo:string;
 
     constructor(){
@@ -22,4 +22,4 @@ export class Wowng2{
     }
 }
 
-module.directive('angularComponent', downgradeComponent({component: Wowng2}));
+module.directive('a2WowComponent', downgradeComponent({component: A2WowComponent}));
