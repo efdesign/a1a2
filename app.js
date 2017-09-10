@@ -20,20 +20,102 @@ System.register("test.module", ["angular"], function (exports_1, context_1) {
         }
     };
 });
-// https://github.com/ui-router/angular-hybrid/tree/master/example
-System.register("a2.app", ["@angular/upgrade/static", "@angular/core", "@angular/platform-browser", "@angular/platform-browser-dynamic", "test.module", "reflect-metadata", "zonejs"], function (exports_2, context_2) {
+//import module from './test.module'
+// conversion to component
+System.register("test.controller", [], function (exports_2, context_2) {
     "use strict";
     var __moduleName = context_2 && context_2.id;
-    var static_1, core_1, platform_browser_1, platform_browser_dynamic_1, core_2, static_2, test_module_1, Ng2Component, RootModule;
+    var TestController;
+    return {
+        setters: [],
+        execute: function () {
+            //import testService from './test.service';
+            TestController = /** @class */ (function () {
+                //testService:any;
+                function TestController() {
+                    console.log('controller instantiated ');
+                    this.foo = 'foo';
+                    this.getFoo = function () {
+                        return this.foo;
+                    };
+                    //this.testService = testService;
+                }
+                return TestController;
+            }());
+            exports_2("TestController", TestController);
+        }
+    };
+});
+System.register("test.service", ["test.module"], function (exports_3, context_3) {
+    "use strict";
+    var __moduleName = context_3 && context_3.id;
+    var test_module_1, testService;
     return {
         setters: [
-            function (static_1_1) {
-                static_1 = static_1_1;
-                static_2 = static_1_1;
+            function (test_module_1_1) {
+                test_module_1 = test_module_1_1;
+            }
+        ],
+        execute: function () {
+            exports_3("testService", testService = function () {
+                this.foo = function () {
+                    console.log('foo from test service foo()');
+                };
+            });
+            test_module_1.default.service('testService', testService);
+        }
+    };
+});
+System.register("wowng2", ["test.module", "jquery", "@angular/core", "@angular/upgrade/static"], function (exports_4, context_4) {
+    "use strict";
+    var __moduleName = context_4 && context_4.id;
+    var test_module_2, core_1, static_1, Wowng2;
+    return {
+        setters: [
+            function (test_module_2_1) {
+                test_module_2 = test_module_2_1;
+            },
+            function (_2) {
             },
             function (core_1_1) {
                 core_1 = core_1_1;
-                core_2 = core_1_1;
+            },
+            function (static_1_1) {
+                static_1 = static_1_1;
+            }
+        ],
+        execute: function () {
+            Wowng2 = /** @class */ (function () {
+                function Wowng2() {
+                    this.foo = 'wow';
+                }
+                Wowng2 = __decorate([
+                    core_1.Component({
+                        selector: 'wowng2',
+                        template: "<span>wow: {{  $ctrl.foo }}</span>"
+                    })
+                ], Wowng2);
+                return Wowng2;
+            }());
+            exports_4("Wowng2", Wowng2);
+            test_module_2.default.directive('angularComponent', static_1.downgradeComponent({ component: Wowng2 }));
+        }
+    };
+});
+// https://github.com/ui-router/angular-hybrid/tree/master/example
+System.register("a2.app", ["@angular/upgrade/static", "@angular/core", "@angular/platform-browser", "@angular/platform-browser-dynamic", "test.module"], function (exports_5, context_5) {
+    "use strict";
+    var __moduleName = context_5 && context_5.id;
+    var static_2, static_3, core_2, platform_browser_1, platform_browser_dynamic_1, core_3, test_module_3, Ng2Component, RootModule;
+    return {
+        setters: [
+            function (static_2_1) {
+                static_2 = static_2_1;
+                static_3 = static_2_1;
+            },
+            function (core_2_1) {
+                core_2 = core_2_1;
+                core_3 = core_2_1;
             },
             function (platform_browser_1_1) {
                 platform_browser_1 = platform_browser_1_1;
@@ -41,15 +123,13 @@ System.register("a2.app", ["@angular/upgrade/static", "@angular/core", "@angular
             function (platform_browser_dynamic_1_1) {
                 platform_browser_dynamic_1 = platform_browser_dynamic_1_1;
             },
-            function (test_module_1_1) {
-                test_module_1 = test_module_1_1;
-            },
-            function (_2) {
-            },
-            function (_3) {
+            function (test_module_3_1) {
+                test_module_3 = test_module_3_1;
             }
         ],
         execute: function () {
+            //import 'reflect-metadata'
+            //import 'zonejs'
             // var app = angular.module('minimal', ['ui.router.upgrade']);
             /*app.run(($stateRegistry, $urlService) => {
               $urlService.rules.initial({state: 'app'});
@@ -95,22 +175,22 @@ System.register("a2.app", ["@angular/upgrade/static", "@angular/core", "@angular
               });
             });*/
             // An AngularJS component
-            test_module_1.default.component('ng1Component', {
+            test_module_3.default.component('ng1Component', {
                 template: "\n      <h1>ng1 component</h1>\n      <!--<a ui-sref=\"app\">Back to app</a>\n      <ui-view></ui-view>-->\n    "
             });
             Ng2Component = /** @class */ (function () {
                 function Ng2Component() {
                 }
                 Ng2Component = __decorate([
-                    core_2.Component({
+                    core_3.Component({
                         selector: 'ng2-component',
                         template: "\n      <h1>ng2 component</h1>\n      <!--<a uiSref=\"app\">Back to app</a>\n      <ui-view></ui-view>-->\n    "
                     })
                 ], Ng2Component);
                 return Ng2Component;
             }());
-            exports_2("Ng2Component", Ng2Component);
-            test_module_1.default.directive('ng2Component', static_2.downgradeComponent({ component: Ng2Component }));
+            exports_5("Ng2Component", Ng2Component);
+            test_module_3.default.directive('ng2Component', static_3.downgradeComponent({ component: Ng2Component }));
             RootModule = /** @class */ (function () {
                 function RootModule() {
                 }
@@ -118,11 +198,11 @@ System.register("a2.app", ["@angular/upgrade/static", "@angular/core", "@angular
                     /* no body: this disables normal (non-hybrid) Angular bootstrapping */
                 };
                 RootModule = __decorate([
-                    core_1.NgModule({
+                    core_2.NgModule({
                         imports: [
                             platform_browser_1.BrowserModule,
                             // Provide Angular upgrade capabilities
-                            static_1.UpgradeModule
+                            static_2.UpgradeModule
                             //,
                             // Provides the @uirouter/angular-hybrid directives
                             //UIRouterUpgradeModule,
@@ -135,14 +215,14 @@ System.register("a2.app", ["@angular/upgrade/static", "@angular/core", "@angular
                 ], RootModule);
                 return RootModule;
             }());
-            exports_2("RootModule", RootModule);
+            exports_5("RootModule", RootModule);
             // Using AngularJS config block, call `deferIntercept()`.
             // This tells UI-Router to delay the initial URL sync (until all bootstrapping is complete)
             // app.config([ '$urlServiceProvider', $urlService => $urlService.deferIntercept() ]);
             // Manually bootstrap the Angular app
             platform_browser_dynamic_1.platformBrowserDynamic().bootstrapModule(RootModule).then(function (platformRef) {
                 var injector = platformRef.injector;
-                var upgrade = injector.get(static_1.UpgradeModule);
+                var upgrade = injector.get(static_2.UpgradeModule);
                 // The DOM must be already be available
                 //upgrade.bootstrap(document.body, [module.name]);
                 upgrade.bootstrap(document.body, ['test']);
@@ -164,46 +244,26 @@ export default angular.element(document).ready(function () {
     angular.bootstrap(document, [module.name]);
 });
 */
-//import module from './test.module'
-// conversion to component
-System.register("test.controller", [], function (exports_3, context_3) {
+System.register("test.directive", ["test.module", "jquery", "test.controller"], function (exports_6, context_6) {
     "use strict";
-    var __moduleName = context_3 && context_3.id;
-    var TestController;
-    return {
-        setters: [],
-        execute: function () {
-            TestController = /** @class */ (function () {
-                function TestController() {
-                    console.log('controller instantiated ');
-                    this.foo = 'foo';
-                    this.getFoo = function () {
-                        return this.foo;
-                    };
-                }
-                return TestController;
-            }());
-            exports_3("TestController", TestController);
-        }
-    };
-});
-System.register("test.directive", ["test.module", "jquery", "test.controller"], function (exports_4, context_4) {
-    "use strict";
-    var __moduleName = context_4 && context_4.id;
-    var test_module_2, my;
+    var __moduleName = context_6 && context_6.id;
+    var test_module_4, my;
     return {
         setters: [
-            function (test_module_2_1) {
-                test_module_2 = test_module_2_1;
+            function (test_module_4_1) {
+                test_module_4 = test_module_4_1;
             },
-            function (_4) {
+            function (_3) {
             },
             function (my_1) {
                 my = my_1;
             }
         ],
         execute: function () {
-            test_module_2.default.directive('fooBar', function () {
+            //import testService from './test.service';
+            //import 'reflect-metadata' // for decorators
+            //import 'zonejs' // whatever 
+            test_module_4.default.directive('fooBar', function () {
                 return {
                     template: '<span>{{$ctrl.foo}}</span>',
                     scope: {},
@@ -213,20 +273,9 @@ System.register("test.directive", ["test.module", "jquery", "test.controller"], 
                     link: function (elm, attr) {
                         // fake some global dependency here...for later
                         console.log(jQuery.fn.jquery);
+                        //testService.foo();
                     }
                 };
-            });
-            test_module_2.default.component('wow', {
-                template: "<span>wow: {{  $ctrl.foo }}</span>",
-                bindings: {
-                    foo: "="
-                },
-                // bindToController:true, -> use bindings
-                // link-> can't use
-                //controllerAs:"$ctrl",
-                controller: function () {
-                    this.foo = 'wow';
-                }
             });
         }
     };

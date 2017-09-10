@@ -39,4 +39,60 @@ https://github.com/ui-router/sample-app-angular-hybrid
 
 https://hackernoon.com/angular-v4-hybrid-upgrade-application-73d5afba1e01
 
+AUGURY -> does not work for me (yet)
 
+//----------------------/----------------------/----------------------/----------------------/----------------------/
+
+Component directives should not use the following attributes:
+
+compile. This will not be supported in Angular.
+replace: true. Angular never replaces a component element with the component template. This attribute is also deprecated in AngularJS.
+priority and terminal. While AngularJS components may use these, they are not used in Angular and it is better not to write code that relies on them.
+
+need rewriting to NOT use these
+
+
+remove unusable member -> switch to component -> switch to A2
+
+Controller lifecycle hook methods $onInit(), $onDestroy(), and $onChanges()
+
+
+
+UpgradeModule. This is a module that contains utilities for bootstrapping and managing hybrid applications that support both Angular and AngularJS code.
+
+
+
+This happens in three main areas: Dependency injection, the DOM, and change detection.
+
+
+//----------------------/----------------------/----------------------/----------------------/----------------------/
+
+DI SERVICES
+
+You can make AngularJS services available for injection to Angular code by upgrading them. The same singleton instance of each service is shared between the frameworks. In Angular these services will always be in the root injector and available to all components.
+You can also make Angular services available for injection to AngularJS code by downgrading them. Only services from the Angular root injector can be downgraded. Again, the same singleton instances are shared between the frameworks. When you register a downgraded service, you must explicitly specify a string token that you want to use in AngularJS.
+
+//----------------------/----------------------/----------------------/----------------------/----------------------/
+
+COMPONENT/ELEMENT OWNERSHIP
+
+The key thing to understand about a hybrid application is that every element in the DOM is owned by exactly one of the two frameworks. The other framework ignores it. If an element is owned by AngularJS, Angular treats it as if it didn't exist, and vice versa.
+
+//----------------------/----------------------/----------------------/----------------------/----------------------/
+
+
+The DOM element <a-component> will remain to be an AngularJS managed element, because it's defined in an AngularJS template. That also means you can apply additional AngularJS directives to it, but not Angular directives. It is only in the template of the <a-component> where Angular steps in. This same rule also applies when you use AngularJS component directives from Angular.
+
+//----------------------/----------------------/----------------------/----------------------/----------------------/
+HYBRID APPLICATION AND MODULARITY
+In a hybrid application you run both versions of Angular at the same time. That means that you need at least one module each from both AngularJS and Angular. You will import UpgradeModule inside the NgModule, and then use it for bootstrapping the AngularJS module.
+
+
+You must bootstrap the Angular bits first and then ask the UpgradeModule to bootstrap the AngularJS bits next.
+
+
+quickstart (repo layout)
+git clone https://github.com/angular/quickstart.git quickstart  
+
+
+systemjs angular loader ??? WHAT IS THIS ? cusom js found in the quickstart folder

@@ -5,14 +5,20 @@
 // https://angular.io/guide/ngmodule
 // https://github.com/vsavkin/upgrade-book-examples/tree/master/ngupgrade/mixing-di/src  /* concrete co-existance example */
 import { UpgradeModule} from '@angular/upgrade/static'
+import { downgradeComponent} from '@angular/upgrade/static';
+
+
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { Component } from '@angular/core';
-import { downgradeComponent} from '@angular/upgrade/static';
+
+
 import module from './test.module';
-import 'reflect-metadata'
-import 'zonejs'
+import {Wowng2} from './wowng2';
+
+//import 'reflect-metadata'
+//import 'zonejs'
 
 // var app = angular.module('minimal', ['ui.router.upgrade']);
 
