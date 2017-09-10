@@ -20,8 +20,8 @@
 
 
 
-                paths:{
-                    'rxjs':'node_modules/rxjs'
+                paths: {
+                    'rxjs': 'node_modules/rxjs'
                 },
 
 
@@ -63,7 +63,7 @@
 
                 },
                 packages: {
-                    
+
                     rxjs: {
                         defaultExtension: 'js'
                     }
@@ -83,9 +83,30 @@
 </head>
 
 <body>
-    <p>This application has more or less the structure and dependencies of the real app we are porting.
-    ui router is not yet in the picture but see readme for article pointing on how to upgrade the router
-    many components are simple and undrealistic but we show di in angular></p>
+
+    <p>this app demonstrates:</p>
+
+    <ul>
+        <li> bootstrap hybrid application (by ng1 module upgrade)</li>
+        <li> upgrade/static</li>
+        <li> updade and downgrade components</li>
+        <li> property binding in downgraded directive/component</li>
+        <li> inputs and outputs</li>
+        <li> system js: manual configuration (not scaffolded with neither cli nor quicksart)</li>
+        <li> tsconfiguration</li>
+        <li> global dependencies and shim (definition)</li>
+        <li> es template string and component decorators</li>
+        <li> typescript compilation</li>
+        <li> typings</li>
+    </ul>
+    <p>todo:</p>
+    <ul>
+        <li> event emitter</li>
+        <li> structural directives</li>
+        <li> upgrade or rewrite of complex directives</li>
+        <li> challenges with other libraries other than jquery</li>
+    </ul>
+
     <ng1-component></ng1-component>
     <foo-bar></foo-bar>
     <ng2-component>
@@ -93,15 +114,15 @@
     </ng2-component>
 
     <!-- this component is declared and used in A2, but does not render -->
-   <!--<wow foo="21" ></wow>-->
+    <!--<wow foo="21" ></wow>-->
 
     <!-- does not render... -->
     <!-- <a2-component></a2-component>-->
 
     <!-- this is wow, dowgraded but the template has A2 syntax-->
     <a2-wow-component [bar]="'I am bar'"></a2-wow-component>
-    
-    
+
+
 </body>
 
 </html>

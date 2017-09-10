@@ -210,9 +210,17 @@ System.register("a2.wow.component", ["a1.module", "jquery", "@angular/core", "@a
                     this.foo = 'wow';
                 }
                 // custom event, handler function
+                //https://angular.io/guide/template-syntax#event-binding---event-
                 A2WowComponent.prototype.onClick = function () {
                     //this.click.emit('I am a custom event return type in a2wow component');
                     console.log('click works ');
+                    this.visible = !this.visible;
+                    this.color = this.random_rgba();
+                    this.color2 = this.random_rgba();
+                };
+                A2WowComponent.prototype.random_rgba = function () {
+                    var o = Math.round, r = Math.random, s = 255;
+                    return 'rgba(0,0,' + o(r() * s) + ',1)';
                 };
                 __decorate([
                     core_3.Input()
@@ -220,7 +228,7 @@ System.register("a2.wow.component", ["a1.module", "jquery", "@angular/core", "@a
                 A2WowComponent = __decorate([
                     core_2.Component({
                         selector: 'wow',
-                        template: "<div (click)=\"onClick()\">A2 wow(selector) component (downgraded)  says: <strong>{{foo}}</strong> bar is an input with value <strong>{{bar}}</strong> from the template</div>"
+                        template: "<div [ngStyle]=\"{'color':color}\" (click)=\"onClick()\">A2 wow(selector) component (downgraded)  says: <strong>{{foo}}</strong> bar is an input with value <strong [style.color]=\"color2\" >{{bar}}</strong> from the template. Click this row to demonstrate property binding on click event. <span [hidden]=\"visible\">(will toggle visibility of this text text)</span></div>"
                     })
                 ], A2WowComponent);
                 return A2WowComponent;
