@@ -203,16 +203,24 @@ System.register("a2.wow.component", ["a1.module", "jquery", "@angular/core", "@a
         ],
         execute: function () {
             A2WowComponent = /** @class */ (function () {
+                // There's one notable exception to the rule of using Angular attribute syntax for downgraded components. It has to do with input or output names that consist of multiple words. In Angular, you would bind these attributes using camelCase:
+                // But when using them from AngularJS templates, you must use kebab-case: in template my-event
+                //@Output() click = new EventEmitter();
                 function A2WowComponent() {
                     this.foo = 'wow';
                 }
+                // custom event, handler function
+                A2WowComponent.prototype.onClick = function () {
+                    //this.click.emit('I am a custom event return type in a2wow component');
+                    console.log('click works ');
+                };
                 __decorate([
                     core_3.Input()
                 ], A2WowComponent.prototype, "bar", void 0);
                 A2WowComponent = __decorate([
                     core_2.Component({
                         selector: 'wow',
-                        template: "<div>A2 wow(selector) component (downgraded)  says: <strong>{{foo}}</strong> bar is an input with value <strong>{{bar}}</strong> from the template</div>"
+                        template: "<div (click)=\"onClick()\">A2 wow(selector) component (downgraded)  says: <strong>{{foo}}</strong> bar is an input with value <strong>{{bar}}</strong> from the template</div>"
                     })
                 ], A2WowComponent);
                 return A2WowComponent;
