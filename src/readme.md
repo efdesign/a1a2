@@ -1,3 +1,6 @@
+SORRY FOR THIS MESS,
+this is just a reminder to myself + some bibliography links.
+
 https://angular.io/guide/deployment
 https://www.npmjs.com/package/@types/angular
 

@@ -84,29 +84,8 @@
 
 <body>
 
-    <p>this app demonstrates:</p>
-
-    <ul>
-        <li> bootstrap hybrid application (by ng1 module upgrade)</li>
-        <li> upgrade/static</li>
-        <li> updade and downgrade components</li>
-        <li> property binding in downgraded directive/component</li>
-        <li> inputs and outputs</li>
-        <li> system js: manual configuration (not scaffolded with neither cli nor quicksart)</li>
-        <li> tsconfiguration</li>
-        <li> global dependencies and shim (definition)</li>
-        <li> es template string and component decorators</li>
-        <li> typescript compilation</li>
-        <li> typings</li>
-    </ul>
-    <p>todo:</p>
-    <ul>
-        <li> event emitter</li>
-        <li> structural directives</li>
-        <li> upgrade or rewrite of complex directives</li>
-        <li> challenges with other libraries other than jquery</li>
-    </ul>
-
+    
+   
     <ng1-component></ng1-component>
     <foo-bar></foo-bar>
     <ng2-component>
@@ -122,7 +101,32 @@
     <!-- this is wow, dowgraded but the template has A2 syntax-->
     <a2-wow-component [bar]="'I am bar'"></a2-wow-component>
 
-
+    <strong>App dynamic stuff is redered above here.<br>
+    This hybrid A shell over AJs app demonstrates:</strong>
+    
+        <ul>
+            <li>bootstrap hybrid application (by ng1 module upgrade)</li>
+            <li>upgrade/static</li>
+            <li>updade and downgrade components</li>
+            <li>property binding in downgraded directive/component</li>
+            <li>inputs and outputs</li>
+            <li>system js: manual configuration (not scaffolded with neither cli nor quicksart)</li>
+            <li>tsconfiguration</li>
+            <li>global dependencies and shim (definition)</li>
+            <li>es template string and component decorators</li>
+            <li>typescript compilation</li>
+            <li>Angular 2 components</li>
+            <li>typings</li>
+           
+        </ul>
+        <p>todo:</p>
+        <ul>
+            <li>event emitter</li>
+            <li>structural directives</li>
+            <li>upgrade or rewrite of complex directives</li>
+            <li>challenges with other libraries other than jquery</li>
+            <li>Systemjs, bundles, barrels and , path renaming</li>
+        </ul>
 </body>
 
 </html>
